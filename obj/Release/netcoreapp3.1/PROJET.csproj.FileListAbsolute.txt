@@ -1,0 +1,11 @@
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/bin/Release/netcoreapp3.1/PROJET.deps.json
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/bin/Release/netcoreapp3.1/PROJET.runtimeconfig.json
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/bin/Release/netcoreapp3.1/PROJET.runtimeconfig.dev.json
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/bin/Release/netcoreapp3.1/PROJET.dll
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/bin/Release/netcoreapp3.1/PROJET.pdb
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/obj/Release/netcoreapp3.1/PROJET.AssemblyInfoInputs.cache
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/obj/Release/netcoreapp3.1/PROJET.AssemblyInfo.cs
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/obj/Release/netcoreapp3.1/PROJET.csproj.CoreCompileInputs.cache
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/obj/Release/netcoreapp3.1/PROJET.dll
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/obj/Release/netcoreapp3.1/PROJET.pdb
+/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/obj/Release/netcoreapp3.1/PROJET.genruntimeconfig.cache
