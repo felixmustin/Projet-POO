@@ -3,8 +3,9 @@ namespace PROJET
 {
     public class ConsommateurType : Node
     {
-        public ConsommateurType()
+        public ConsommateurType(string id) : base (id)
         {
+            this.id = id;
         }
     }
 }

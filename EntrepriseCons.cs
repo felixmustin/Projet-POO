@@ -1,10 +1,11 @@
 ﻿using System;
 namespace PROJET
 {
-    public class EntrepriseCons
+    public class EntrepriseCons : ConsommateurType
     {
-        public EntrepriseCons()
+        public EntrepriseCons(string id) : base(id)
         {
+            this.id = id;
         }
     }
 }

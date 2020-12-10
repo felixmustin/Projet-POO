@@ -6,33 +6,21 @@ namespace PROJET
     {
         static void Main(string[] args)
         {
-            Console.Writeline('salut');
-            GazCentral G1 = new GazCentral("Centrale à Gaz");
 
             Graph graph = new Graph();
 
-            Node node1 = new Node("Centrale 1");
+            GazCentral Gaz = new GazCentral("Centrale à Gaz");
 
-            Node node2 = new Node("Maison");
+            VilleCons Bxl = new VilleCons("Bruxelles");
 
-            Node node3 = new Node("Entreprise");
+            graph.CreateNode(Gaz);
+            graph.CreateNode(Bxl);
 
-            graph.CreateNode(node1);
-            graph.CreateNode(node2);
-            graph.CreateNode(node3);
-
-            graph.CreateNode(G1);
-
-            Lines e12 = new Lines(node1, node2, 1);
-            Lines e13 = new Lines(node1, node3, 2);
-
-            Lines e34 = new Lines(G1, node3, 3);
+            Lines e12 = new Lines(Gaz, Bxl, 1);
 
             if (graph.checkForAvailability())
             {
-                node1.AddDistribution(e12);
-                node1.AddDistribution(e13);
-                G1.AddDistribution(e34);
+                Gaz.AddDistribution(e12);
 
                 graph.GetGraph();
             }

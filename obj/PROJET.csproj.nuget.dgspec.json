@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/PROJET.csproj": {}
+    "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/Projet-POO/PROJET.csproj": {}
   },
   "projects": {
-    "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/PROJET.csproj": {
+    "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/Projet-POO/PROJET.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/PROJET.csproj",
+        "projectUniqueName": "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/Projet-POO/PROJET.csproj",
         "projectName": "PROJET",
-        "projectPath": "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/PROJET.csproj",
+        "projectPath": "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/Projet-POO/PROJET.csproj",
         "packagesPath": "/Users/felixmustin/.nuget/packages/",
-        "outputPath": "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/obj/",
+        "outputPath": "/Users/felixmustin/Desktop/Software engineering/Laboratoires/PROJET/PROJET/Projet-POO/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/felixmustin/.config/NuGet/NuGet.Config"
+          "/Users/felixmustin/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

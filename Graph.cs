@@ -16,8 +16,7 @@ namespace PROJET
         public void CreateNode(Node node)
         {
             this.nodes.Add(node);
-            this.nbrNodes++;
-           
+            this.nbrNodes++;   
         }
 
         public int getNumberOfNodes()
