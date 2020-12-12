@@ -16,19 +16,15 @@ namespace PROJET
         public void CreateNode(Node node)
         {
             this.nodes.Add(node);
-            this.nbrNodes++;   
-        }
-
-        public int getNumberOfNodes()
-        {
-            return this.nbrNodes;
+            this.nbrNodes++;
+           
         }
 
         public void GetGraph()
         {
             foreach (Node node in nodes)
             {
-                if(node.GetDistribution().Capacity > 0)
+                if(node.GetDistribution().Count > 0)
                 {
                     Console.WriteLine("\n Lignes de distribution du node " + node.GetNodeId());
                     foreach (Lines distributions in node.GetDistribution())
