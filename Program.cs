@@ -9,14 +9,25 @@ namespace PROJET
         {
             Graph graph = new Graph();
 
+            ConcentrationNode Concentration1 = new ConcentrationNode("Noeud de reception 1");
+            DistributionNode Distribution1 = new DistributionNode("Noeud de distribution 1", 0);
+
             GazCentral Gaz = new GazCentral("Centrale à Gaz", 1000);
             EolienCentral Eolienne = new EolienCentral("Centrale Eolienne",15000);
 
-            ConcentrationNode Concentration1 = new ConcentrationNode("Noeud de reception 1");
-            DistributionNode Distribution1 = new DistributionNode("Noeud de distribution 1");
-
             VilleCons Bruxelles = new VilleCons("Bruxelles", 5000);
             EntrepriseCons ECAM = new EntrepriseCons("ECAM", 1000);
+            EtrangerCons France = new EtrangerCons("France", 2000);
+
+            Bruxelles.addConsommation(1000);
+            Console.WriteLine(Bruxelles.consommation);
+
+            Distribution1.consommation = Bruxelles.consommation + ECAM.consommation + France.consommation;
+
+            Console.WriteLine(Distribution1.consommation);
+
+
+
 
             Meteo brabant = new Meteo(0.8, 0.1, 28);
 
@@ -35,6 +46,7 @@ namespace PROJET
             Lines e34 = new Lines(Concentration1, Distribution1, 3);
             Lines e45 = new Lines(Distribution1, Bruxelles, 4);
             Lines e46 = new Lines(Distribution1, ECAM, 5);
+            Lines e47 = new Lines(Distribution1, France, 6);
 
             brabant.Vent(Eolienne);
 
@@ -46,6 +58,7 @@ namespace PROJET
                 Concentration1.AddDistribution(e34);
                 Distribution1.AddDistribution(e45);
                 Distribution1.AddDistribution(e46);
+                Distribution1.AddDistribution(e47);
                 
                 graph.GetGraph();
                 Console.WriteLine("\n");
