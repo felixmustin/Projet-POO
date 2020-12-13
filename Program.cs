@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PROJET
 {
@@ -17,6 +18,10 @@ namespace PROJET
             VilleCons Bruxelles = new VilleCons("Bruxelles", 5000);
             EntrepriseCons ECAM = new EntrepriseCons("ECAM", 1000);
 
+            Meteo brabant = new Meteo(0.8, 0.1, 28);
+
+            var liste_producteur = new List<CentraleType>(){Eolienne, Gaz};
+            var liste_consommateur = new List<ConsommateurType>(){Bruxelles, ECAM};
 
             graph.CreateNode(Gaz);
             graph.CreateNode(Eolienne);
@@ -31,6 +36,8 @@ namespace PROJET
             Lines e45 = new Lines(Distribution1, Bruxelles, 4);
             Lines e46 = new Lines(Distribution1, ECAM, 5);
 
+            brabant.Vent(Eolienne);
+
 
             if (graph.checkForAvailability())
             {
@@ -41,16 +48,19 @@ namespace PROJET
                 Distribution1.AddDistribution(e46);
                 
                 graph.GetGraph();
+                Console.WriteLine("\n");
+                Tableau tableau = new Tableau(liste_producteur, liste_consommateur);
+                tableau.show();
+                
             }
             else
             {
                 Console.WriteLine("There are less than 2 nodes. Add more to connect.");
             }
+            // Vent brabant = new Vent(Eolienne, 0.5, "Centrale Eolienne");
+            // Grève Pont_a_Celle = new Grève(Gaz, 0.3, "Centrale à Gaz");
 
-            Vent brabant = new Vent(Eolienne, 0.5, "Centrale Eolienne");
-            Grève Pont_a_Celle = new Grève(Gaz, 0.3, "Centrale à Gaz");
-
+            
         }
-
     }
 }

@@ -3,7 +3,7 @@ namespace PROJET
 {
     public class GazCentral : CentraleType
     {
-        public GazCentral(string id, int production) : base(id)
+        public GazCentral(string id, double production) : base(id)
         {
             this.id = id;
             Production = production;

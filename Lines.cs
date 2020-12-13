@@ -16,7 +16,6 @@ namespace PROJET
         {
             return this.from;
         }
-
         public Node GetTo()
         {
             return this.to;
@@ -53,7 +52,5 @@ namespace PROJET
             this.id = id;
             
         }
-        
-        
     }
 }

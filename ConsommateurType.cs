@@ -7,8 +7,7 @@ namespace PROJET
 
         public double consommation;
 
-
-        public ConsommateurType(string id, int consommation) : base(id)
+        public ConsommateurType(string id, double consommation) : base(id)
         {
             this.id = id;
             this.consommation = consommation;
@@ -27,5 +26,9 @@ namespace PROJET
             double total = consommation;
             return total;
         }
+        public virtual double getConsommation()
+		{
+			return consommation;
+		}
     }
 }
