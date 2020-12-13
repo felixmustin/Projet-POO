@@ -26,6 +26,5 @@ namespace PROJET
         {
             central.Production = central.Production*temperature;
         }
-
     }
 }

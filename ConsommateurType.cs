@@ -10,25 +10,20 @@ namespace PROJET
         public ConsommateurType(string id, double consommation) : base(id)
         {
             this.id = id;
-            this.consommation = consommation;
+            this.Production = consommation;
         }
         public void addConsommation(int montant)
         {
-            consommation = consommation + montant;
+            this.Production += montant;
         }
         public void substractConsommation(int montant)
         {
-            consommation = consommation - montant;
+            this.Production -= montant;
         }
 
-        public double total()
-        {
-            double total = consommation;
-            return total;
-        }
         public virtual double getConsommation()
 		{
-			return consommation;
+			return this.Production;
 		}
     }
 }

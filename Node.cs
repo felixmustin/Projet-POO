@@ -8,6 +8,7 @@ namespace PROJET
         public string id;
         private List<Lines> distribution = new List<Lines>();
         private List<Lines> reception = new List<Lines>();
+        public double Production;
 
         public string GetNodeId()
         {

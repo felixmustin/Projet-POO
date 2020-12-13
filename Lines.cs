@@ -6,7 +6,17 @@ namespace PROJET
         private Node from;
         private Node to;
         private int id;
-        
+        int Puissance_Max;
+
+        public Lines(Node f, Node t, int id, int Puissance)
+        {
+            validate(f, t);
+            this.from = f;
+            this.to = t;
+            this.id = id;
+            this.Puissance_Max = Puissance;
+        }
+
         public int GetId()
         {
             return this.id;
@@ -31,9 +41,8 @@ namespace PROJET
             return this.to.GetNodeId();
         }
 
-        private void validate(Node f, Node t)
+        public void validate(Node f, Node t)
         {
-
             if (f is ConsommateurType)
             {
                 throw new Exception("Un consommateur ne peut pas envoyer d'énergie");
@@ -42,15 +51,14 @@ namespace PROJET
             {
                 throw new Exception("Une centrale ne peut pas recevoir d'énergie");
             }
-        }
-
-        public Lines(Node f, Node t, int id)
-        {
-            validate(f, t);
-            this.from = f;
-            this.to = t;
-            this.id = id;
-            
-        }
+            else if (t is ConcentrationNode || t is DistributionNode)
+            {
+                t.Production += f.Production;
+            }
+            else if (t is ConsommateurType)
+            {
+                f.Production -= t.Production;
+            }
+        } 
     }
 }

@@ -23,7 +23,7 @@ namespace PROJET
             Console.WriteLine(astérix);
             foreach (CentraleType producteur in list_Producteur)
             {
-                Console.WriteLine(producteur.getid() + space + producteur.getProduction()+ space + producteur.getCO2());
+                Console.WriteLine(producteur.GetNodeId() + space + producteur.getProduction()+"W"+ space + producteur.getCO2()+"kg"+ space + producteur.getCout() + "€");
             }
             Console.WriteLine(barre);
             foreach (ConsommateurType consommateur in list_Consommateur)

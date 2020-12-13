@@ -9,30 +9,23 @@ namespace PROJET
         {
             Graph graph = new Graph();
 
-            ConcentrationNode Concentration1 = new ConcentrationNode("Noeud de reception 1");
+            ConcentrationNode Concentration1 = new ConcentrationNode("Noeud de reception 1", 0);
             DistributionNode Distribution1 = new DistributionNode("Noeud de distribution 1", 0);
 
-            GazCentral Gaz = new GazCentral("Centrale à Gaz", 1000);
-            EolienCentral Eolienne = new EolienCentral("Centrale Eolienne",15000);
+            GazCentral Gaz = new GazCentral("Centrale à Gaz", 1000, 25, 222);
+            EolienCentral Eolienne = new EolienCentral("Centrale Eolienne",15000, 5, 100);
+            NuclearCentral Nuclear = new NuclearCentral("centrale nucléaire", 2000);
 
             VilleCons Bruxelles = new VilleCons("Bruxelles", 5000);
             EntrepriseCons ECAM = new EntrepriseCons("ECAM", 1000);
             EtrangerCons France = new EtrangerCons("France", 2000);
 
-            Bruxelles.addConsommation(1000);
-            Console.WriteLine(Bruxelles.consommation);
-
-            Distribution1.consommation = Bruxelles.consommation + ECAM.consommation + France.consommation;
-
-            Console.WriteLine(Distribution1.consommation);
-
-
-
-
             Meteo brabant = new Meteo(0.8, 0.1, 28);
 
             var liste_producteur = new List<CentraleType>(){Eolienne, Gaz};
-            var liste_consommateur = new List<ConsommateurType>(){Bruxelles, ECAM};
+            var liste_consommateur = new List<ConsommateurType>(){Bruxelles, ECAM, France};
+            var liste_distribution = new List<DistributionNode>(){Distribution1};
+            var liste_concentration = new List<ConcentrationNode>(){Concentration1};  
 
             graph.CreateNode(Gaz);
             graph.CreateNode(Eolienne);
@@ -40,15 +33,17 @@ namespace PROJET
             graph.CreateNode(Distribution1);
             graph.CreateNode(Bruxelles);
             graph.CreateNode(ECAM);
+            graph.CreateNode(France);
 
-            Lines e13 = new Lines(Gaz, Concentration1, 1);
-            Lines e23 = new Lines(Eolienne, Concentration1, 2);
-            Lines e34 = new Lines(Concentration1, Distribution1, 3);
-            Lines e45 = new Lines(Distribution1, Bruxelles, 4);
-            Lines e46 = new Lines(Distribution1, ECAM, 5);
-            Lines e47 = new Lines(Distribution1, France, 6);
+            Lines e13 = new Lines(Gaz, Concentration1, 1,1000);
+            Lines e23 = new Lines(Eolienne, Concentration1, 2,1000);
+            Lines e34 = new Lines(Concentration1, Distribution1, 3,1000);
+            Lines e45 = new Lines(Distribution1, Bruxelles, 4,1000);
+            Lines e46 = new Lines(Distribution1, ECAM, 5,1000);
+            Lines e47 = new Lines(Distribution1, France, 6,1000);
 
-            brabant.Vent(Eolienne);
+            Tableau tableau = new Tableau(liste_producteur, liste_consommateur);
+            CentreControle Nasa = new CentreControle(liste_distribution, liste_concentration);
 
 
             if (graph.checkForAvailability())
@@ -61,19 +56,22 @@ namespace PROJET
                 Distribution1.AddDistribution(e47);
                 
                 graph.GetGraph();
+
                 Console.WriteLine("\n");
-                Tableau tableau = new Tableau(liste_producteur, liste_consommateur);
+
                 tableau.show();
-                
             }
             else
             {
                 Console.WriteLine("There are less than 2 nodes. Add more to connect.");
             }
-            // Vent brabant = new Vent(Eolienne, 0.5, "Centrale Eolienne");
-            // Grève Pont_a_Celle = new Grève(Gaz, 0.3, "Centrale à Gaz");
-
             
+            brabant.Vent(Eolienne);
+            Gaz.addProduction(500);
+
+            Nasa.mise_a_jour(graph, tableau);
+            Nasa.ControleProduction();
+
         }
     }
 }
