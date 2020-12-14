@@ -12,13 +12,13 @@ namespace PROJET
             this.id = id;
             this.Production = consommation;
         }
-        public void addConsommation(int montant)
+        public virtual void addConsommation(double montant)
         {
-            this.Production += montant;
+            Production += montant;
         }
-        public void substractConsommation(int montant)
+        public virtual void substractConsommation(double montant)
         {
-            this.Production -= montant;
+            Production -= montant;
         }
 
         public virtual double getConsommation()

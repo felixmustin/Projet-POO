@@ -22,6 +22,8 @@ namespace PROJET
 
             Meteo brabant = new Meteo(0.8, 0.1, 28);
 
+            Batterie batterie_1 = new Batterie("Batterie de stockage", 0);
+
             var liste_producteur = new List<CentraleType>(){Eolienne, Gaz};
             var liste_consommateur = new List<ConsommateurType>(){Bruxelles, ECAM, France};
             var liste_distribution = new List<DistributionNode>(){Distribution1};
@@ -34,8 +36,12 @@ namespace PROJET
             graph.CreateNode(Bruxelles);
             graph.CreateNode(ECAM);
             graph.CreateNode(France);
+            graph.CreateNode(batterie_1);
 
-            Lines e13 = new Lines(Gaz, Concentration1, 1,1000);
+            Lines e38 = new Lines(Concentration1, batterie_1, 8, 100000);
+            Console.WriteLine(e38.GetTo());
+            Concentration1.AddDistribution(e38);
+            Lines e13 = new Lines(Gaz, Concentration1, 1,1500);
             Lines e23 = new Lines(Eolienne, Concentration1, 2,1000);
             Lines e34 = new Lines(Concentration1, Distribution1, 3,1000);
             Lines e45 = new Lines(Distribution1, Bruxelles, 4,1000);
@@ -55,23 +61,30 @@ namespace PROJET
                 Distribution1.AddDistribution(e46);
                 Distribution1.AddDistribution(e47);
                 
+                
                 graph.GetGraph();
 
                 Console.WriteLine("\n");
 
                 tableau.show();
+
+                Nasa.ControleProduction();
             }
             else
             {
                 Console.WriteLine("There are less than 2 nodes. Add more to connect.");
             }
-            
+
+
+            //Modifications sur le réseau
+
             brabant.Vent(Eolienne);
             Gaz.addProduction(500);
+            Eolienne.addProduction(250);
+            Bruxelles.substractConsommation(500);
 
             Nasa.mise_a_jour(graph, tableau);
             Nasa.ControleProduction();
-
         }
     }
 }

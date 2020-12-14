@@ -7,14 +7,15 @@ namespace PROJET
         private Node to;
         private int id;
         int Puissance_Max;
+        double mise_aniveau;
 
         public Lines(Node f, Node t, int id, int Puissance)
         {
+            this.Puissance_Max = Puissance;
             validate(f, t);
             this.from = f;
             this.to = t;
             this.id = id;
-            this.Puissance_Max = Puissance;
         }
 
         public int GetId()
@@ -53,12 +54,49 @@ namespace PROJET
             }
             else if (t is ConcentrationNode || t is DistributionNode)
             {
-                t.Production += f.Production;
+                if (f.Production > Puissance_Max)
+                {
+                    Console.WriteLine("entrer 1 exception {0} {1}  ok", t.GetDistribution().Count, t.GetNodeId());
+                    foreach(Lines lignes in t.GetDistribution()){
+                        Console.Write("Entrée liste distribution");
+                        if(lignes.GetTo() is Batterie)
+                        {
+                            Console.Write("Entrée batterie");
+                            t.Production += lignes.GetTo().Production;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Attention surchage sur la ligne {0}, veuillez baisser la production ou rajouter une batterie", lignes.GetId());
+                        }
+                    }
+                }
+                else{
+                    t.Production += f.Production;
+                }
             }
             else if (t is ConsommateurType)
             {
                 f.Production -= t.Production;
             }
-        } 
+        }
+        public void Maj ()
+        {
+            if (to is ConcentrationNode)
+            {
+                to.Production = 0;
+                foreach (Lines ligne in to.GetReception())
+                {
+                    to.Production += ligne.GetFrom().Production;
+                }
+            }
+            if (from is DistributionNode)
+            {
+                from.Production = 0;
+                foreach (Lines Ligne in from.GetDistribution())
+                {
+                    from.Production += Ligne.GetTo().Production;
+                }
+            }
+        }
     }
 }

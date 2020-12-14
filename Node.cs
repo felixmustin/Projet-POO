@@ -24,13 +24,20 @@ namespace PROJET
             else if (this is ConcentrationNode)
             {
                 if (this.GetDistribution().Count>0){
-                        throw new Exception("Un noeud de concentration n'a qu'une ligne en sortie");
+                    if(e.GetTo() is Batterie){
+                        this.distribution.Add(e);
+                        e.GetTo().reception.Add(e);
                     }
+                    else {
+                        throw new Exception("Un noeud de concentration n'a qu'une ligne en sortie ou un batterie");
+                    }
+                }     
                 else{
                     this.distribution.Add(e);
                     e.GetTo().reception.Add(e);
                 }
             }
+
             else if (e.GetTo() is DistributionNode)
             {  
                 if (e.GetTo().GetReception().Count>0){

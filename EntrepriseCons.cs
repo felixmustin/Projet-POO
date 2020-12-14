@@ -6,11 +6,19 @@ namespace PROJET
         public EntrepriseCons(string id, double consomation) : base(id, consomation)
         {
             this.id = id;
-            this.consommation = consomation;
+            this.Production = consomation;
         }
         public override double getConsommation()
 		{
-			return consommation;
+			return Production;
 		}
+        public override void addConsommation(double montant)
+        {
+            Production += montant;
+        }
+        public override void substractConsommation(double montant)
+        {
+            Production -= montant;
+        }
     }
 }

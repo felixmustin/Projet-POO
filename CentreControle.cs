@@ -26,6 +26,7 @@ namespace PROJET
                         Console.WriteLine("/! ALERTE /! La consommation surpasse la production !!!");
                         double difference = distributionNode.Production - concentrationNode.Production;
                         Console.WriteLine("FAITES CHAUFFER LES TURBINES, il manque {0}W", difference);
+                        Console.WriteLine("\n");
                     }
 
                     else if (distributionNode.Production < concentrationNode.Production)
@@ -33,6 +34,7 @@ namespace PROJET
                         Console.WriteLine("/! ALERTE /! La production surpasse la consommation !!!");
                         double difference =  concentrationNode.Production - distributionNode.Production;
                         Console.WriteLine("REFROIDISSEZ LES TURBINES, il y a {0}W en plus",difference);
+                        Console.WriteLine("\n");
                     }
 
                     else {
@@ -43,6 +45,21 @@ namespace PROJET
         }
         public void mise_a_jour(Graph graphique, Tableau board)
         {
+            foreach(Node noeud in graphique.getList())
+            {
+                if (noeud is ConcentrationNode ){
+                    foreach(Lines ligneDe in noeud.GetReception()){
+                        ligneDe.Maj();
+                    } 
+                }
+ 
+                else if (noeud is DistributionNode ){
+                    foreach(Lines ligneVers in noeud.GetDistribution()){
+                        ligneVers.Maj();
+                    } 
+                }
+            }
+
             if (graphique.checkForAvailability())
             {
                 graphique.GetGraph();
@@ -58,5 +75,3 @@ namespace PROJET
         }    
     }
 }
-
-

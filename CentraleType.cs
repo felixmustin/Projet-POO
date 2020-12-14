@@ -17,14 +17,14 @@ namespace PROJET
             this.id = id;
         }
 
-		public void addProduction(int montant)
+		public void addProduction(double montant)
         {
-            Production = Production + montant;
+            Production += montant;
         }
 
-		public void substractProduction(int montant)
+		public void substractProduction(double montant)
         {
-            Production = Production - montant;
+            Production -= montant;
         }
 
 		public virtual double getProduction()

@@ -19,18 +19,31 @@ namespace PROJET
 
         public void GetGraph()
         {
+            Console.WriteLine("GRAPHE" + "\n");
             foreach (Node node in nodes)
             {
-                if(node.GetDistribution().Count > 0)
+                if (node is ConcentrationNode)
                 {
-                    Console.WriteLine(node.GetNodeId());
-                    foreach (Lines distributions in node.GetDistribution())
-                    {
-                        Console.Write("Ligne " + distributions.GetId() + " : " + distributions.GetIdOfFromNode() + " -> " + distributions.GetIdOfToNode() + "\n");
+                    foreach(Lines ligneDe in node.GetReception()){
+                        Console.WriteLine(ligneDe.GetFrom().GetNodeId() + " -----> " + node.GetNodeId());
                     }
-                    Console.Write(new string ('-', 30) + "\n");
+                    Console.WriteLine(new string ('-', 50));
+                    foreach(Lines ligneVers in node.GetDistribution()){
+                        Console.WriteLine(node.GetNodeId() + " -----> " + ligneVers.GetTo().GetNodeId());
+                    }
+                    Console.WriteLine(new string ('-', 50));
+                }
+                if (node is DistributionNode)
+                {
+                    foreach(Lines ligneVers in node.GetDistribution()){
+                        Console.WriteLine(node.GetNodeId()  + " -----> "  + ligneVers.GetTo().GetNodeId());
+                    }
                 }  
             }                
+        }
+        public List<Node> getList()
+        {
+            return nodes;
         }
     }
 }

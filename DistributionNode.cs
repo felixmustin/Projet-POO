@@ -9,9 +9,5 @@ namespace PROJET
             this.id = id;
             this.Production = consommation;
         }
-        public void addConsommation(Node f)
-        {
-                        
-        }
     }
 }
