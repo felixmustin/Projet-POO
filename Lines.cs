@@ -56,12 +56,9 @@ namespace PROJET
             {
                 if (f.Production > Puissance_Max)
                 {
-                    Console.WriteLine("entrer 1 exception {0} {1}  ok", t.GetDistribution().Count, t.GetNodeId());
                     foreach(Lines lignes in t.GetDistribution()){
-                        Console.Write("Entrée liste distribution");
                         if(lignes.GetTo() is Batterie)
                         {
-                            Console.Write("Entrée batterie");
                             t.Production += lignes.GetTo().Production;
                         }
                         else

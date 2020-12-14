@@ -39,14 +39,19 @@ namespace PROJET
             graph.CreateNode(batterie_1);
 
             Lines e38 = new Lines(Concentration1, batterie_1, 8, 100000);
-            Console.WriteLine(e38.GetTo());
             Concentration1.AddDistribution(e38);
             Lines e13 = new Lines(Gaz, Concentration1, 1,1500);
+            Gaz.AddDistribution(e13);
             Lines e23 = new Lines(Eolienne, Concentration1, 2,1000);
+            Eolienne.AddDistribution(e23);
             Lines e34 = new Lines(Concentration1, Distribution1, 3,1000);
+            Concentration1.AddDistribution(e34);
             Lines e45 = new Lines(Distribution1, Bruxelles, 4,1000);
+            Distribution1.AddDistribution(e45);
             Lines e46 = new Lines(Distribution1, ECAM, 5,1000);
+            Distribution1.AddDistribution(e46);
             Lines e47 = new Lines(Distribution1, France, 6,1000);
+            Distribution1.AddDistribution(e47);
 
             Tableau tableau = new Tableau(liste_producteur, liste_consommateur);
             CentreControle Nasa = new CentreControle(liste_distribution, liste_concentration);
@@ -54,13 +59,6 @@ namespace PROJET
 
             if (graph.checkForAvailability())
             {
-                Gaz.AddDistribution(e13);
-                Eolienne.AddDistribution(e23);
-                Concentration1.AddDistribution(e34);
-                Distribution1.AddDistribution(e45);
-                Distribution1.AddDistribution(e46);
-                Distribution1.AddDistribution(e47);
-                
                 
                 graph.GetGraph();
 
