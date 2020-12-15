@@ -9,7 +9,7 @@ namespace PROJET
             this.Production = production;
 			Production_Energy = new double[2]{0.8, 0.5 };
             this.Co2_production = Co2;
-            this.Cout_Produit = Cout;
+            this.Cout = Cout;
         }
         
 		public override double getProduction()
@@ -22,7 +22,7 @@ namespace PROJET
         }
         public override int getCout()
         {
-            return Cout_Produit;
+            return Cout;
         }
     }
 }

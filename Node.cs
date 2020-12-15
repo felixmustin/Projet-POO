@@ -8,11 +8,23 @@ namespace PROJET
         public string id;
         private List<Lines> distribution = new List<Lines>();
         private List<Lines> reception = new List<Lines>();
+        private List<Marché> marchés = new List<Marché>();
         public double Production;
+        public int Cout;
 
         public string GetNodeId()
         {
             return this.id;
+        }
+
+        public virtual void addProduction(double montant)
+        {
+            Production += montant;
+        }
+
+		public virtual void substractProduction(double montant)
+        {
+            Production -= montant;
         }
 
         public void AddDistribution(Lines e)

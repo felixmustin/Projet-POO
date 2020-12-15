@@ -6,15 +6,15 @@ namespace PROJET
     class Program
     {
         static void Main(string[] args)
-        {
+        {   
             Graph graph = new Graph();
 
             ConcentrationNode Concentration1 = new ConcentrationNode("Noeud de reception 1", 0);
             DistributionNode Distribution1 = new DistributionNode("Noeud de distribution 1", 0);
 
-            GazCentral Gaz = new GazCentral("Centrale à Gaz", 1000, 25, 222);
+            GazCentral Gaz = new GazCentral("Centrale à Gaz", 1000, 25, 200);
             EolienCentral Eolienne = new EolienCentral("Centrale Eolienne",15000, 5, 100);
-            NuclearCentral Nuclear = new NuclearCentral("centrale nucléaire", 2000);
+            NuclearCentral Nuclear = new NuclearCentral("centrale nucléaire", 2000, 300);
 
             VilleCons Bruxelles = new VilleCons("Bruxelles", 5000);
             EntrepriseCons ECAM = new EntrepriseCons("ECAM", 1000);
@@ -57,42 +57,38 @@ namespace PROJET
             Tableau tableau = new Tableau(liste_producteur1, liste_consommateur1, liste_batteries1);
             CentreControle Nasa = new CentreControle(liste_distribution1, liste_concentration1);
 
-            /*if (graph.checkForAvailability()){               
-                graph.GetGraph();
-
-                Console.WriteLine("\n");
-
-                tableau.show();
-
-                Nasa.ControleProduction();
-                Console.Write("{0} et {1}", Concentration1.Production, Distribution1.Production);}
-            else{
-                Console.WriteLine("There are less than 2 nodes. Add more to connect.");}
-            */
             
             //Modifications sur le réseau
 
-            brabant.Vent(Eolienne);
-            Gaz.addProduction(500);
-            Eolienne.addProduction(1000);
-            Bruxelles.substractConsommation(500);        
-            
+            //brabant.Vent(Eolienne);
+            //Gaz.addProduction(500);
+            //Eolienne.addProduction(1000);
+            //Bruxelles.substractConsommation(500); 
+
             Nasa.mise_a_jour(graph, tableau);
+
             Nasa.ControleProduction();
 
+            if (graph.checkForAvailability()){
+                graph.GetGraph();
+                Console.WriteLine("\n");
+                tableau.show();
+            }
+            else{
+                Console.WriteLine("There are less than 2 nodes. Add more to connect.");
+            }
+            
 
 
 
-
-
-
+            /*
             Graph graph2 = new Graph();
 
             ConcentrationNode Concentration2 = new ConcentrationNode("Noeud de reception 2", 0);
             DistributionNode Distribution2 = new DistributionNode("Noeud de distribution 2", 0);
 
-            SolarCentral Solar = new SolarCentral("Centrale solaire", 1000, 200);
-            EolienCentral Eolienne2 = new EolienCentral("Centrale Eolienne 2", 2000, 5, 100);
+            SolarCentral Solar = new SolarCentral("Centrale solaire", 4000, 200);
+            EolienCentral Eolienne2 = new EolienCentral("Centrale Eolienne 2", 4000, 5, 100);
 
             VilleCons Mons = new VilleCons("Mons", 1000);
             EntrepriseCons Google = new EntrepriseCons("Google", 1500);
@@ -135,30 +131,26 @@ namespace PROJET
             Tableau tableau2 = new Tableau(liste_producteur2, liste_consommateur2, liste_batteries2);
             CentreControle Nasa2 = new CentreControle(liste_distribution2, liste_concentration2);
 
-            /*if (graph.checkForAvailability()){               
-                graph.GetGraph();
-
-                Console.WriteLine("\n");
-
-                tableau.show();
-
-                Nasa.ControleProduction();
-                Console.Write("{0} et {1}", Concentration1.Production, Distribution1.Production);}
-            else{
-                Console.WriteLine("There are less than 2 nodes. Add more to connect.");}
-            */
             
             //Modifications sur le réseau
        
             wallonnie.Ensoleillement(Solar);
-            Bruxelles.substractConsommation(1000);
+            Mons.substractConsommation(500);
             New_York.substractConsommation(3000);
 
             Nasa2.mise_a_jour(graph2, tableau2);
+
             Nasa2.ControleProduction();
 
-
-
+            if (graph2.checkForAvailability()){
+                graph2.GetGraph();
+                Console.WriteLine("\n");
+                tableau2.show();
+            }
+            else{
+                Console.WriteLine("There are less than 2 nodes. Add more to connect.");
+            }
+            */
         }
     }
 }

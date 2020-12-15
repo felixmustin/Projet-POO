@@ -7,7 +7,7 @@ namespace PROJET
         {
             this.id = id;
             this.Production = production;
-            this.Cout_Produit = Cout;
+            this.Cout = Cout;
         }
         public override double getProduction()
 		{
@@ -15,7 +15,7 @@ namespace PROJET
 		}
         public override int getCout()
         {
-            return Cout_Produit;
+            return Cout;
         }
 
     }

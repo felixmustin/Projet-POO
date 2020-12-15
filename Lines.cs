@@ -50,7 +50,9 @@ namespace PROJET
                     if(lignes.GetTo() is Batterie)
                     {
                         to.Production += Puissance_Max;
-                        lignes.GetTo().Production = (from.Production-Puissance_Max);
+                        if (from.Production-Puissance_Max > 0){
+                            lignes.GetTo().Production = (from.Production-Puissance_Max);
+                        }
                     }
                     else
                     {
@@ -74,7 +76,7 @@ namespace PROJET
                 else if (to is ConcentrationNode || to is DistributionNode)
                 {
                     to.Production += from.Production;               
-                    }
+                }
                 else if (from is DistributionNode)
                 {
                     from.Production -= to.Production;

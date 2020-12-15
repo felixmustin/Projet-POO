@@ -10,9 +10,9 @@ namespace PROJET
 
         public Marché(int achat, int vente, int combustible)
         {
-            achat = Prix_achat;
-            vente = Prix_Vente;
-            combustible = Prix_Combustible;
+            Prix_achat = achat;
+            Prix_Vente = vente;
+            Prix_Combustible = combustible;
         }
     
         public int getPrix_Achat()

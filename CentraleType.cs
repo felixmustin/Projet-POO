@@ -10,19 +10,18 @@ namespace PROJET
 		public double[] Production_Energy;
 
 		public int Co2_production;
-		public int Cout_Produit;
 
         public CentraleType(string id) : base(id)
         {
             this.id = id;
         }
 
-		public void addProduction(double montant)
+		public override void addProduction(double montant)
         {
             Production += montant;
         }
 
-		public void substractProduction(double montant)
+		public override void substractProduction(double montant)
         {
             Production -= montant;
         }
@@ -43,7 +42,7 @@ namespace PROJET
 		}
 		public virtual int getCout()
 		{
-			return Cout_Produit;
+			return Cout;
 		}
 	}
 }
