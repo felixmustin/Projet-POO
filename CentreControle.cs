@@ -21,19 +21,19 @@ namespace PROJET
             {
                 foreach(ConcentrationNode concentrationNode in liste_noeud_Concentration)
                 {
-                    if (distributionNode.Production > concentrationNode.Production)
+                    if (distributionNode.Production < 0 )
                     {
                         Console.WriteLine("/! ALERTE /! La consommation surpasse la production !!!");
                         double difference = distributionNode.Production - concentrationNode.Production;
-                        Console.WriteLine("FAITES CHAUFFER LES TURBINES, il manque {0}W", difference);
+                        Console.WriteLine("FAITES CHAUFFER LES TURBINES, il manque {0}W", Math.Abs(distributionNode.Production));
                         Console.WriteLine("\n");
                     }
 
-                    else if (distributionNode.Production < concentrationNode.Production)
+                    else if (distributionNode.Production > 0 )
                     {
                         Console.WriteLine("/! ALERTE /! La production surpasse la consommation !!!");
                         double difference =  concentrationNode.Production - distributionNode.Production;
-                        Console.WriteLine("REFROIDISSEZ LES TURBINES, il y a {0}W en plus",difference);
+                        Console.WriteLine("REFROIDISSEZ LES TURBINES, il y a {0}W en plus",Math.Abs(distributionNode.Production));
                         Console.WriteLine("\n");
                     }
 
@@ -51,12 +51,15 @@ namespace PROJET
                     foreach(Lines ligneDe in noeud.GetReception()){
                         ligneDe.Maj();
                     } 
+                    foreach(Lines lignesVers in noeud.GetDistribution()){
+                        lignesVers.Maj();
+                    }
                 }
  
                 else if (noeud is DistributionNode ){
                     foreach(Lines ligneVers in noeud.GetDistribution()){
                         ligneVers.Maj();
-                    } 
+                    }       
                 }
             }
 

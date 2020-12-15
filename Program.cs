@@ -28,6 +28,7 @@ namespace PROJET
             var liste_consommateur = new List<ConsommateurType>(){Bruxelles, ECAM, France};
             var liste_distribution = new List<DistributionNode>(){Distribution1};
             var liste_concentration = new List<ConcentrationNode>(){Concentration1};  
+            var liste_batteries = new List<Batterie>(){batterie_1};
 
             graph.CreateNode(Gaz);
             graph.CreateNode(Eolienne);
@@ -42,9 +43,9 @@ namespace PROJET
             Concentration1.AddDistribution(e38);
             Lines e13 = new Lines(Gaz, Concentration1, 1,1500);
             Gaz.AddDistribution(e13);
-            Lines e23 = new Lines(Eolienne, Concentration1, 2,1000);
+            Lines e23 = new Lines(Eolienne, Concentration1, 2,2000);
             Eolienne.AddDistribution(e23);
-            Lines e34 = new Lines(Concentration1, Distribution1, 3,1000);
+            Lines e34 = new Lines(Concentration1, Distribution1, 3,10000);
             Concentration1.AddDistribution(e34);
             Lines e45 = new Lines(Distribution1, Bruxelles, 4,1000);
             Distribution1.AddDistribution(e45);
@@ -53,7 +54,7 @@ namespace PROJET
             Lines e47 = new Lines(Distribution1, France, 6,1000);
             Distribution1.AddDistribution(e47);
 
-            Tableau tableau = new Tableau(liste_producteur, liste_consommateur);
+            Tableau tableau = new Tableau(liste_producteur, liste_consommateur, liste_batteries);
             CentreControle Nasa = new CentreControle(liste_distribution, liste_concentration);
 
 
@@ -73,14 +74,13 @@ namespace PROJET
                 Console.WriteLine("There are less than 2 nodes. Add more to connect.");
             }
 
-
             //Modifications sur le réseau
 
             brabant.Vent(Eolienne);
             Gaz.addProduction(500);
             Eolienne.addProduction(250);
             Bruxelles.substractConsommation(500);
-
+    
             Nasa.mise_a_jour(graph, tableau);
             Nasa.ControleProduction();
         }

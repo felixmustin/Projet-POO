@@ -7,15 +7,18 @@ namespace PROJET
     {
         string astérix = new string ('*', 100);
         string barre = new string ('-', 100);
-        string space = new string (' ', 21);
+        string space = new string (' ', 26);
 
         private List<CentraleType> list_Producteur = new List<CentraleType>();
         private List<ConsommateurType> list_Consommateur = new List<ConsommateurType>();
 
-        public Tableau (List<CentraleType> liste_1, List<ConsommateurType> liste_2)
+        private List<Batterie> list_batteries = new List<Batterie>();
+
+        public Tableau (List<CentraleType> liste_1, List<ConsommateurType> liste_2, List<Batterie> liste_3)
         {
             list_Consommateur = liste_2;
             list_Producteur = liste_1;
+            list_batteries = liste_3;
         }
 
         public void show()
@@ -24,7 +27,7 @@ namespace PROJET
             Console.WriteLine(astérix);
             foreach (CentraleType producteur in list_Producteur)
             {
-                Console.WriteLine(producteur.GetNodeId() + (space.Remove(0, producteur.GetNodeId().Length)) + producteur.getProduction()+"W"+ (space.Remove(0, producteur.getProduction().ToString().Length)) + producteur.getCO2()+"kg"+ (space.Remove(0, producteur.getCO2().ToString().Length)) + producteur.getCout() + "€");
+                Console.WriteLine(producteur.GetNodeId() + (space.Remove(0, producteur.GetNodeId().Length)) + producteur.getProduction()+"W"+ " (" + producteur.GetDistribution()[0].Puissance_Max + "W max )" + (space.Remove(0, producteur.getProduction().ToString().Length)) + producteur.getCO2()+"kg"+ (space.Remove(0, producteur.getCO2().ToString().Length)) + producteur.getCout() + "€");
             }
             Console.WriteLine(barre);
             foreach (ConsommateurType consommateur in list_Consommateur)
@@ -32,6 +35,10 @@ namespace PROJET
                 Console.WriteLine(consommateur.GetNodeId() + (space.Remove(0, consommateur.GetNodeId().Length)) + consommateur.getConsommation() + "\n");
             }
             Console.WriteLine(barre);
+            foreach(ConsommateurType batteries in list_batteries)
+            {
+                Console.WriteLine(batteries.GetNodeId() + (space.Remove(0, batteries.GetNodeId().Length)) + batteries.getConsommation() + "\n");
+            }
         }
     }
 }

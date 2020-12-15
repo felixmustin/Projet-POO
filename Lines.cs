@@ -6,7 +6,7 @@ namespace PROJET
         private Node from;
         private Node to;
         private int id;
-        int Puissance_Max;
+        public int Puissance_Max;
         double mise_aniveau;
 
         public Lines(Node f, Node t, int id, int Puissance)
@@ -59,13 +59,18 @@ namespace PROJET
                     foreach(Lines lignes in t.GetDistribution()){
                         if(lignes.GetTo() is Batterie)
                         {
-                            t.Production += lignes.GetTo().Production;
+                            t.Production += Puissance_Max;
+                            lignes.GetTo().Production = (f.Production-Puissance_Max);
                         }
                         else
                         {
                             Console.WriteLine("Attention surchage sur la ligne {0}, veuillez baisser la production ou rajouter une batterie", lignes.GetId());
                         }
                     }
+                    if(t.GetDistribution().Count == 0){
+                        throw new Exception("Surcharge sur la ligne de tranfert");
+                    }
+                    
                 }
                 else{
                     t.Production += f.Production;
@@ -83,16 +88,35 @@ namespace PROJET
                 to.Production = 0;
                 foreach (Lines ligne in to.GetReception())
                 {
+                    if(ligne.GetFrom().Production > this.Puissance_Max)
+                    {
+                        to.Production += this.Puissance_Max;
+                    }
+                    else{to.Production += ligne.GetFrom().Production;}
+                }
+            }
+
+            if (to is DistributionNode)
+            {
+                to.Production=0;
+                foreach (Lines ligne in to.GetReception())
+                {
                     to.Production += ligne.GetFrom().Production;
                 }
             }
-            if (from is DistributionNode)
+
+            else if (to is Batterie)
             {
-                from.Production = 0;
-                foreach (Lines Ligne in from.GetDistribution())
+                to.Production=0;
+                foreach (Lines ligne in this.GetFrom().GetReception())
                 {
-                    from.Production += Ligne.GetTo().Production;
+                    to.Production += (ligne.GetFrom().Production - ligne.Puissance_Max);
                 }
+            }
+
+            else if (from is DistributionNode)
+            {
+                from.Production -= to.Production;
             }
         }
     }
