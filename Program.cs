@@ -41,26 +41,25 @@ namespace PROJET
 
             Lines e38 = new Lines(Concentration1, batterie_1, 8, 100000);
             Concentration1.AddDistribution(e38);
-            Lines e13 = new Lines(Gaz, Concentration1, 1,1500);
+            Lines e13 = new Lines(Gaz, Concentration1, 1, 5000);
             Gaz.AddDistribution(e13);
-            Lines e23 = new Lines(Eolienne, Concentration1, 2,2000);
+            Lines e23 = new Lines(Eolienne, Concentration1, 2, 5000);
             Eolienne.AddDistribution(e23);
-            Lines e34 = new Lines(Concentration1, Distribution1, 3,10000);
+            Lines e34 = new Lines(Concentration1, Distribution1, 3,100000);
             Concentration1.AddDistribution(e34);
-            Lines e45 = new Lines(Distribution1, Bruxelles, 4,1000);
+            Lines e45 = new Lines(Distribution1, Bruxelles, 4,20000);
             Distribution1.AddDistribution(e45);
-            Lines e46 = new Lines(Distribution1, ECAM, 5,1000);
+            Lines e46 = new Lines(Distribution1, ECAM, 5,20000);
             Distribution1.AddDistribution(e46);
-            Lines e47 = new Lines(Distribution1, France, 6,1000);
+            Lines e47 = new Lines(Distribution1, France, 6,20000);
             Distribution1.AddDistribution(e47);
 
             Tableau tableau = new Tableau(liste_producteur, liste_consommateur, liste_batteries);
             CentreControle Nasa = new CentreControle(liste_distribution, liste_concentration);
 
-
-            if (graph.checkForAvailability())
-            {
-                
+            
+            /*if (graph.checkForAvailability())
+            {               
                 graph.GetGraph();
 
                 Console.WriteLine("\n");
@@ -68,19 +67,23 @@ namespace PROJET
                 tableau.show();
 
                 Nasa.ControleProduction();
+                Console.Write("{0} et {1}", Concentration1.Production, Distribution1.Production);
             }
             else
             {
                 Console.WriteLine("There are less than 2 nodes. Add more to connect.");
             }
+            */
+            
 
             //Modifications sur le réseau
 
+            
             brabant.Vent(Eolienne);
             Gaz.addProduction(500);
-            Eolienne.addProduction(250);
-            Bruxelles.substractConsommation(500);
-    
+            Eolienne.addProduction(1000);
+            Bruxelles.substractConsommation(500);        
+            
             Nasa.mise_a_jour(graph, tableau);
             Nasa.ControleProduction();
         }

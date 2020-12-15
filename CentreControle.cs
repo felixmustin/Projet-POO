@@ -44,24 +44,43 @@ namespace PROJET
             }    
         }
         public void mise_a_jour(Graph graphique, Tableau board)
-        {
+        {    
             foreach(Node noeud in graphique.getList())
             {
                 if (noeud is ConcentrationNode ){
-                    foreach(Lines ligneDe in noeud.GetReception()){
-                        ligneDe.Maj();
-                    } 
+                    noeud.Production = 0;
+                    foreach(Lines ligneDe in noeud.GetReception())
+                    {
+                        if(ligneDe.GetFrom().Production > ligneDe.Puissance_Max){
+                            noeud.Production += ligneDe.Puissance_Max;
+                        }
+                        else{
+                            noeud.Production += ligneDe.GetFrom().Production;
+                        }
+                    }
+
                     foreach(Lines lignesVers in noeud.GetDistribution()){
-                        lignesVers.Maj();
+                        if(lignesVers.GetTo() is DistributionNode){
+                            lignesVers.GetTo().Production=0;
+                            lignesVers.GetTo().Production += noeud.Production;
+                        }
+                        else if (lignesVers.GetTo() is Batterie){
+                            lignesVers.GetTo().Production=0;
+                            foreach (Lines ligne in noeud.GetReception())
+                            {
+                                lignesVers.GetTo().Production += (ligne.GetFrom().Production - ligne.Puissance_Max);
+                            }
+                        }
                     }
                 }
- 
+                
                 else if (noeud is DistributionNode ){
                     foreach(Lines ligneVers in noeud.GetDistribution()){
-                        ligneVers.Maj();
+                        noeud.Production -= ligneVers.GetTo().Production;
                     }       
                 }
             }
+            
 
             if (graphique.checkForAvailability())
             {
