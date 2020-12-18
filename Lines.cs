@@ -83,46 +83,5 @@ namespace PROJET
                 }
             } 
         }
-
-        /*
-        public void Maj ()
-        {
-            if (to is ConcentrationNode)
-            {
-                to.Production = 0;
-                foreach (Lines ligne in to.GetReception())
-                {
-                    if(ligne.GetFrom().Production > this.Puissance_Max)
-                    {
-                        to.Production += this.Puissance_Max;
-                    }
-                    else{to.Production += ligne.GetFrom().Production;}
-                }
-            }
-
-            if (to is DistributionNode)
-            {
-                to.Production=0;
-                foreach (Lines ligne in to.GetReception())
-                {
-                    to.Production += ligne.GetFrom().Production;
-                }
-            }
-
-            else if (to is Batterie)
-            {
-                to.Production=0;
-                foreach (Lines ligne in this.GetFrom().GetReception())
-                {
-                    to.Production += (ligne.GetFrom().Production - ligne.Puissance_Max);
-                }
-            }
-
-            else if (from is DistributionNode)
-            {
-                from.Production -= to.Production;
-            }
-        }
-        */
     }
 }

@@ -8,7 +8,7 @@ namespace PROJET
     {
         private List<DistributionNode> liste_noeud_Distribution = new List<DistributionNode>();
         private List<ConcentrationNode> liste_noeud_Concentration  = new List<ConcentrationNode>();
-        Marché Europe = new Marché(300, 1, 1500);
+        Marché Europe = new Marché(1000, 1000, 1500);
         private int cout_initial;
         private Node Central_reference;
 
@@ -39,27 +39,22 @@ namespace PROJET
                                     cout_initial = Europe.getPrix_Achat();
                                 }
                                 if (lignes.GetFrom().Cout < cout_initial){
-                                    cout_initial = lignes.GetFrom().Cout;
-                                    Central_reference = lignes.GetFrom();
+                                    if(lignes.GetFrom().Production+Math.Abs(distributionNode.Production)<=lignes.Puissance_Max){
+                                        cout_initial = lignes.GetFrom().Cout;
+                                        Central_reference = lignes.GetFrom();
+                                    }
                                 }
                             }
                         }
                         if (cout_initial == Europe.getPrix_Achat()){
-                            concentrationNode.Production += Math.Abs(distributionNode.Production);
+                            concentrationNode.addProduction(Math.Abs(distributionNode.Production));
+                            Console.WriteLine(Math.Abs(distributionNode.Production) + " ont été achetés");
                         }
                         else{
-                            foreach(Lines ligne in Central_reference.GetDistribution()){
-                                if((Central_reference.Production+Math.Abs(distributionNode.Production)) < ligne.Puissance_Max){
-                                    Central_reference.addProduction(Math.Abs(distributionNode.Production));
-                                }
-                                else {
-                                    concentrationNode.Production += Math.Abs(distributionNode.Production);
-                                    Console.WriteLine(Math.Abs(distributionNode.Production) + " ont été achetés");
-                                }
-                            }
-                        }
+                            Central_reference.addProduction(Math.Abs(distributionNode.Production));
+                        }                         
                     }
-
+                
                     else if (distributionNode.Production > 0 )
                     {
                         Console.WriteLine("/! ALERTE /! La production surpasse la consommation !!!");
@@ -72,17 +67,23 @@ namespace PROJET
                             {   
                                 if (lignes.GetId() == noeuds.GetReception()[0].GetId()){
                                     cout_initial = Europe.getPrix_Vente();
-                                    concentrationNode.Production -= Math.Abs(distributionNode.Production);
+                                    
                                 }
                                 if ((lignes.GetFrom().Cout*Math.Abs(distributionNode.Production)) > (cout_initial*Math.Abs(distributionNode.Production))){
-                                    cout_initial = lignes.GetFrom().Cout;
-                                    Central_reference = lignes.GetFrom();
+                                    if(lignes.GetFrom().Production-Math.Abs(distributionNode.Production)>=0){
+                                        cout_initial = lignes.GetFrom().Cout;
+                                        Central_reference = lignes.GetFrom();
+                                    }
                                 }
                             }
                         }
-                        if (cout_initial != Europe.getPrix_Vente()){
-                            Central_reference.substractProduction(Math.Abs(distributionNode.Production));
+                        if (cout_initial == Europe.getPrix_Vente()){
+                            concentrationNode.substractProduction(Math.Abs(distributionNode.Production));
+                            Console.WriteLine(Math.Abs(distributionNode.Production) + " ont été vendus");
                         }
+                        else{
+                            Central_reference.substractProduction(Math.Abs(distributionNode.Production));
+                        } 
                     }
                 }
             }    
@@ -113,7 +114,12 @@ namespace PROJET
                             foreach (Lines ligne in noeud.GetReception())
                             {
                                 if (ligne.GetFrom().Production-ligne.Puissance_Max > 0){
-                                    lignesVers.GetTo().Production += (ligne.GetFrom().Production - ligne.Puissance_Max);
+                                    if((ligne.GetFrom().Production - ligne.Puissance_Max)>0){
+                                        lignesVers.GetTo().addProduction(ligne.GetFrom().Production - ligne.Puissance_Max);
+                                    }
+                                    else{
+                                        lignesVers.GetTo().Production =0;
+                                    }       
                                 }  
                             }
                         }

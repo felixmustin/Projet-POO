@@ -12,12 +12,12 @@ namespace PROJET
             ConcentrationNode Concentration1 = new ConcentrationNode("Noeud de reception 1", 0);
             DistributionNode Distribution1 = new DistributionNode("Noeud de distribution 1", 0);
 
-            GazCentral Gaz = new GazCentral("Centrale à Gaz", 1000, 25, 200);
-            EolienCentral Eolienne = new EolienCentral("Centrale Eolienne",15000, 5, 100);
+            GazCentral Gaz = new GazCentral("Centrale à Gaz", 500, 25, 200);
+            EolienCentral Eolienne = new EolienCentral("Centrale Eolienne",2000, 5, 100);
             NuclearCentral Nuclear = new NuclearCentral("centrale nucléaire", 2000, 300);
 
             VilleCons Bruxelles = new VilleCons("Bruxelles", 5000);
-            EntrepriseCons ECAM = new EntrepriseCons("ECAM", 1000);
+            EntrepriseCons ECAM = new EntrepriseCons("ECAM", 3000);
             EtrangerCons France = new EtrangerCons("France", 2000);
 
             Meteo brabant = new Meteo(0.8, 0.1, 28);
@@ -41,9 +41,9 @@ namespace PROJET
 
             Lines e38 = new Lines(Concentration1, batterie_1, 8, 100000);
             Concentration1.AddDistribution(e38);
-            Lines e13 = new Lines(Gaz, Concentration1, 1, 5000);
+            Lines e13 = new Lines(Gaz, Concentration1, 1, 8000);
             Gaz.AddDistribution(e13);
-            Lines e23 = new Lines(Eolienne, Concentration1, 2, 5000);
+            Lines e23 = new Lines(Eolienne, Concentration1, 2, 8000);
             Eolienne.AddDistribution(e23);
             Lines e34 = new Lines(Concentration1, Distribution1, 3,100000);
             Concentration1.AddDistribution(e34);
@@ -78,7 +78,6 @@ namespace PROJET
                 Console.WriteLine("There are less than 2 nodes. Add more to connect.");
             }
             
-
 
 
             /*
