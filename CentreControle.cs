@@ -8,17 +8,19 @@ namespace PROJET
     {
         private List<DistributionNode> liste_noeud_Distribution = new List<DistributionNode>();
         private List<ConcentrationNode> liste_noeud_Concentration  = new List<ConcentrationNode>();
+        private List<Node> liste_noeud_achat  = new List<Node>();
         Marché Europe = new Marché(1000, 1000, 1500);
         private int cout_initial;
         private Node Central_reference;
 
-        public CentreControle(List<DistributionNode> liste_3, List<ConcentrationNode> liste_4)
+        public CentreControle(List<DistributionNode> liste_3, List<ConcentrationNode> liste_4, List<Node> liste_5)
         {
             liste_noeud_Distribution = liste_3;
             liste_noeud_Concentration = liste_4;
+            liste_noeud_achat = liste_5;
         }
 
-        public void ControleProduction()
+        public void ControleProduction(Graph graphique, Tableau board)
         {
             foreach(DistributionNode distributionNode in liste_noeud_Distribution)
             {
@@ -47,8 +49,10 @@ namespace PROJET
                             }
                         }
                         if (cout_initial == Europe.getPrix_Achat()){
-                            concentrationNode.addProduction(Math.Abs(distributionNode.Production));
-                            Console.WriteLine(Math.Abs(distributionNode.Production) + " ont été achetés");
+                            foreach(Node noeud_achat in liste_noeud_achat){
+                                noeud_achat.addProduction(Math.Abs(distributionNode.Production));
+                                Console.WriteLine(Math.Abs(distributionNode.Production) + " ont été achetés");
+                            }
                         }
                         else{
                             Central_reference.addProduction(Math.Abs(distributionNode.Production));
@@ -86,9 +90,62 @@ namespace PROJET
                         } 
                     }
                 }
-            }    
+            } 
+            //maj
+            foreach(Node noeud in graphique.getList())
+            {
+                if (noeud is ConcentrationNode )
+                {
+                    noeud.Production = 0;
+                    foreach(Lines lignes in noeud.GetReception())
+                    {
+                        lignes.validate();
+                    }
+                }
+                else if (noeud is DistributionNode )
+                {
+                    noeud.Production = 0;
+                    foreach(Lines lignes in noeud.GetDistribution())
+                    {
+                       lignes.validate();
+                    }
+                    foreach(Lines lignes in noeud.GetReception())
+                    {
+                       lignes.validate();
+                    }  
+                }  
+            }   
         }
-        public void mise_a_jour(Graph graphique, Tableau board)
+        /* public void mise_a_jour(Graph graphique, Tableau board)
+        {
+            foreach(Node noeud in graphique.getList())
+            {
+                if (noeud is ConcentrationNode )
+                {
+                    noeud.Production = 0;
+                    foreach(Lines lignes in noeud.GetReception())
+                    {
+                        lignes.validate();
+                    }
+                }
+                else if (noeud is DistributionNode )
+                {
+                    noeud.Production = 0;
+                    foreach(Lines lignes in noeud.GetDistribution())
+                    {
+                       lignes.validate();
+                    }
+                    foreach(Lines lignes in noeud.GetReception())
+                    {
+                       lignes.validate();
+                    }  
+                }  
+            }
+        } */      
+    }  
+}
+
+/* public void mise_a_jour(Graph graphique, Tableau board)
         {    
             foreach(Node noeud in graphique.getList())
             {
@@ -133,6 +190,4 @@ namespace PROJET
                 }
             }
             
-        }    
-    }
-}
+        } */

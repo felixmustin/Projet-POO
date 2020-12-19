@@ -4,7 +4,6 @@ namespace PROJET
 {
     public class ConsommateurType : Node
     {
-
         public double consommation;
 
         public ConsommateurType(string id, double consommation) : base(id)
