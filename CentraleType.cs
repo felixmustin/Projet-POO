@@ -19,13 +19,20 @@ namespace PROJET
 		public override void addProduction(double montant)
         {
             Production += montant;
+			Program.Alerte += ("\n" + "Ajout de " +montant+ "W de production à " + this.GetNodeId());
         }
 
 		public override void substractProduction(double montant)
         {
             Production -= montant;
+			if(this.Production ==0){
+				Program.Alerte +=("\n" + "Arret de " + this.GetNodeId());
+			}
+			else{
+				Program.Alerte +=("\n" + "Retrait de " +montant+ "W de production à " + this.GetNodeId());
+			}
         }
-
+ 
 		public virtual double getProduction()
 		{
 			return Production;

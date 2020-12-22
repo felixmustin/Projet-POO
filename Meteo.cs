@@ -15,11 +15,13 @@ namespace PROJET
         public void Vent(CentraleType central)
         {
             central.Production = central.Production*forceVent;
+            Program.Alerte +=("\n" + "Vent de " +forceVent+ " modifiant la production de " + central.GetNodeId());
         }
 
         public void Ensoleillement(CentraleType central)
         {
             central.Production = central.Production*ensoleillement;
+            Program.Alerte +=("\n" + "Ensoleillement de " +ensoleillement+ " modifiant la production de " + central.GetNodeId());
         }
 
         public void Temperature(CentraleType central)

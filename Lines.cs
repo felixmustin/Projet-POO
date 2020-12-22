@@ -52,6 +52,7 @@ namespace PROJET
                         to.Production += Puissance_Max;
                         if (from.Production-Puissance_Max > 0){
                             lignes.GetTo().Production = (from.Production-Puissance_Max);
+                            Program.Alerte += ("\n" + "Ajout de " + (from.Production-Puissance_Max) + " à la Batterie" );
                             from.Production -= from.Production-Puissance_Max;
                         }
                     }

@@ -26,6 +26,7 @@ namespace PROJET
         public void show()
         {
             Console.WriteLine("TABLEAU" + "\n");
+            Console.WriteLine(Program.Alerte);
             Console.WriteLine(astérix);
             foreach (CentraleType producteur in list_Producteur)
             {

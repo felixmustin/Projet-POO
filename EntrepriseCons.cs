@@ -12,13 +12,5 @@ namespace PROJET
 		{
 			return Production;
 		}
-        public override void addConsommation(double montant)
-        {
-            Production += montant;
-        }
-        public override void substractConsommation(double montant)
-        {
-            Production -= montant;
-        }
     }
 }

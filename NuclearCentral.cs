@@ -14,5 +14,13 @@ namespace PROJET
 		{
 			return Production;
 		}
+        public override int getCO2()
+        {
+            return Co2_production;
+        }
+        public override int getCout()
+        {
+            return Cout;
+        }
     }
 }
