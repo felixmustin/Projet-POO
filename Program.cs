@@ -1,13 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace PROJET
 {
     class Program
     {
         public static string Alerte ="";
-        static void Main(string[] args)
+
+        public static void Main(string[] args)
         {   
+            Thread myThread = new Thread(new ThreadStart(ThreadLoop));
+
+            myThread.Start();
+            Thread.Sleep(30000);
+            myThread.Interrupt();
+        } 
+        static public void ThreadLoop()
+        {
             Graph graph = new Graph();
 
             ConcentrationNode Concentration1 = new ConcentrationNode("Noeud de reception 1", 0);
@@ -24,15 +34,11 @@ namespace PROJET
 
             Batterie batterie_1 = new Batterie("Batterie de stockage", 0);
 
-            Achat achat1 = new Achat("Achat", 0);
-
             var liste_producteur1 = new List<CentraleType>(){Eolienne, Gaz};
             var liste_consommateur1 = new List<ConsommateurType>(){Bruxelles, ECAM, France};
             var liste_distribution1 = new List<DistributionNode>(){Distribution1};
             var liste_concentration1 = new List<ConcentrationNode>(){Concentration1};  
             var liste_batteries1 = new List<Batterie>(){batterie_1};
-            var liste_achat1 = new List<Node>(){achat1};
-
 
             graph.CreateNode(Gaz);
             graph.CreateNode(Eolienne);
@@ -42,7 +48,6 @@ namespace PROJET
             graph.CreateNode(Bruxelles);
             graph.CreateNode(France);
             graph.CreateNode(batterie_1);
-            graph.CreateNode(achat1);
 
             Lines e38 = new Lines(Concentration1, batterie_1, 8, 100000);
             Concentration1.AddDistribution(e38);
@@ -50,8 +55,6 @@ namespace PROJET
             Gaz.AddDistribution(e13);
             Lines e23 = new Lines(Eolienne, Concentration1, 2, 10000);
             Eolienne.AddDistribution(e23);
-            Lines e93 = new Lines(achat1, Concentration1, 9, 10000);
-            achat1.AddDistribution(e93);
             Lines e34 = new Lines(Concentration1, Distribution1, 3,100000);
             Concentration1.AddDistribution(e34);
             Lines e45 = new Lines(Distribution1, Bruxelles, 4,20000);
@@ -61,14 +64,59 @@ namespace PROJET
             Lines e47 = new Lines(Distribution1, France, 6,20000);
             Distribution1.AddDistribution(e47);
 
-            Tableau tableau = new Tableau(liste_producteur1, liste_consommateur1, liste_batteries1, liste_achat1);
-            CentreControle Nasa = new CentreControle(liste_distribution1, liste_concentration1, liste_achat1);
+            Tableau tableau = new Tableau(liste_producteur1, liste_consommateur1, liste_batteries1);
+            CentreControle Nasa = new CentreControle(liste_distribution1, liste_concentration1);
+
+
+            // Tant que le thread n'est pas tué, on travaille
+            while (Thread.CurrentThread.IsAlive)
+            {
+            Nasa.ControleProduction(graph, tableau);
+            graph.GetGraph();
+            Console.WriteLine("\n");
+            tableau.show();
+
+            // Attente de 5s
+            Thread.Sleep(8000);
+
+            Alerte="";
+            brabant.Vent(Eolienne);
+            Nasa.ControleProduction(graph, tableau);
+            graph.GetGraph();
+            Console.WriteLine("\n");
+            tableau.show();
+
+            // Attente de 5s
+            Thread.Sleep(8000);
+
+            Alerte="";
+            Gaz.addProduction(5000);
+            Nasa.ControleProduction(graph, tableau);
+            graph.GetGraph();
+            Console.WriteLine("\n");
+            tableau.show();
+
+            // Attente de 5s
+            Thread.Sleep(8000);  
+
+            Alerte="";
+            France.substractConsommation(5000);
+            Nasa.ControleProduction(graph, tableau);
+            graph.GetGraph();
+            Console.WriteLine("\n");
+            tableau.show();
+            }
+        }
+    }
+}
+
+
 
 
             //Modifications sur le réseau
 
 
-            brabant.Vent(Eolienne);
+            /* brabant.Vent(Eolienne);
             Gaz.addProduction(5000);
             France.substractConsommation(5000);
 
@@ -81,7 +129,6 @@ namespace PROJET
             }
             else{
                 Console.WriteLine("There are less than 2 nodes. Add more to connect.");
-            }
-        }
-    }
-}
+            }*/
+
+            

@@ -8,25 +8,25 @@ namespace PROJET
     {
         private List<DistributionNode> liste_noeud_Distribution = new List<DistributionNode>();
         private List<ConcentrationNode> liste_noeud_Concentration  = new List<ConcentrationNode>();
-        private List<Node> liste_noeud_achat  = new List<Node>();
         Marché Europe = new Marché(1000, 1000, 1500);
         private int cout_initial;
-        private double ConsommationTot=0;
-        private double ProductionTot=0;
         private Node Central_reference;
 
-        public CentreControle(List<DistributionNode> liste_3, List<ConcentrationNode> liste_4, List<Node> liste_5)
+        public CentreControle(List<DistributionNode> liste_3, List<ConcentrationNode> liste_4)
         {
             liste_noeud_Distribution = liste_3;
             liste_noeud_Concentration = liste_4;
-            liste_noeud_achat = liste_5;
         }
 
         public void ControleProduction(Graph graphique, Tableau board)
         {
+            double ConsommationTot=0;
+            double ProductionTot=0;
+
             foreach(DistributionNode distributionNode in liste_noeud_Distribution){
                 foreach(Lines lignesV in distributionNode.GetDistribution()){
                     ConsommationTot += (lignesV.GetTo().Production);
+
                 }
             }
                 
@@ -43,8 +43,7 @@ namespace PROJET
 
             if (ProductionTot<ConsommationTot)
             {
-                Console.WriteLine("/! ALERTE /! La consommation surpasse la production !!!");
-                Console.WriteLine("FAITES CHAUFFER LES TURBINES, il manque {0}W", (ConsommationTot-ProductionTot));
+                Console.WriteLine("/! ALERTE /! La consommation surpasse la production, il manque {0}W",(ConsommationTot-ProductionTot));
                 Console.WriteLine("\n");
                 // crée valeur global erreur qui récupère les proplèmes trouvé
 
@@ -67,9 +66,11 @@ namespace PROJET
                     }
                 
                     if (cout_initial == Europe.getPrix_Achat()){
-                        foreach(Node noeud_achat in liste_noeud_achat){
-                            noeud_achat.addProduction((ConsommationTot-ProductionTot));
-                            Console.WriteLine((ConsommationTot-ProductionTot) + " ont été achetés");
+                        foreach(Lines ligne in noeuds.GetDistribution()){
+                            if(ligne.GetTo() is DistributionNode){
+                                ligne.GetTo().addProduction((ConsommationTot-ProductionTot));
+                                Program.Alerte += ("\n" + (ConsommationTot-ProductionTot) + " ont été achetés");
+                            }   
                         }
                     }
                     else{
@@ -80,8 +81,7 @@ namespace PROJET
                 
             else if (ProductionTot>ConsommationTot)
             {
-                Console.WriteLine("/! ALERTE /! La production surpasse la consommation !!!");
-                Console.WriteLine("REFROIDISSEZ LES TURBINES, il y a {0}W en plus",(ProductionTot-ConsommationTot));
+                Console.WriteLine("/! ALERTE /! La production surpasse la consommation, il y a {0}W en plus", (ProductionTot-ConsommationTot));
                 Console.WriteLine("\n");
 
                 foreach(ConcentrationNode noeuds in liste_noeud_Concentration)
@@ -105,7 +105,7 @@ namespace PROJET
                 
                     if (cout_initial == Europe.getPrix_Vente()){
                         noeuds.substractProduction((ProductionTot-ConsommationTot));
-                        Console.WriteLine((ProductionTot-ConsommationTot) + " ont été vendus");
+                        Program.Alerte += ("\n" + (ProductionTot-ConsommationTot) + " ont été vendus");
                     }
                     else{
                         Central_reference.substractProduction((ProductionTot-ConsommationTot));
@@ -116,7 +116,7 @@ namespace PROJET
             //maj
             foreach(Node noeud in graphique.getList())
             {
-                if (noeud is ConcentrationNode )
+                if (noeud is ConcentrationNode)
                 {
                     noeud.Production = 0;
                     foreach(Lines lignes in noeud.GetReception())
@@ -124,7 +124,7 @@ namespace PROJET
                         lignes.validate();
                     }
                 }
-                else if (noeud is DistributionNode )
+                else if (noeud is DistributionNode)
                 {
                     noeud.Production = 0;
                     foreach(Lines lignes in noeud.GetDistribution())

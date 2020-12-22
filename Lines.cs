@@ -71,7 +71,7 @@ namespace PROJET
                 }
                 else if (to is ConcentrationNode)
                 {
-                    to.Production += from.Production;               
+                    to.Production += from.Production;    
                 }
                 else if(to is DistributionNode)
                 {
