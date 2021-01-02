@@ -61,14 +61,7 @@ Le tableau est l'affichage recapitulatif du réseau et ses différents noeuds
 Le centre de controle s'assure que le réseau soit fonctionnel et l'ajuste en fonction des différentes modifications
 
 
-**Affichage**
-`graph.GetGraph();`
-`tableau.show();`
-Permet l'affichage du graph ainsi que du tableau
-
-
-
-## MODIFICATIONS
+**Lancement simulation et modification sur le réseau**
 Pour faire des modifications sur le réseau, il suffit de rajouter un bloc comme ci dessous, et d'y mettre la commande de modification souhaitée pour le réseau
 
 `Alerte="";`
@@ -77,3 +70,9 @@ Pour faire des modifications sur le réseau, il suffit de rajouter un bloc comme
 `graph.GetGraph();`
 `Console.WriteLine("\n");`
 `tableau.show();`
+
+
+
+## MODIFICATIONS
+Il est également possible de rajouter des éléments au code si l'on souhaite.
+Pour rajouter d'autres types de consommateurs ou de centrales de production, il suffit simplement de rajouter un fichier à son nom, héritant de la classe `CentraleType` pour une centrale ou `ConsommateurType`pour un consommateur.
