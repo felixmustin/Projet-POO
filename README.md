@@ -1,9 +1,11 @@
 # Simulateur de Réseau Electrique
-Bienvenue sur notre plateforme de simulation d'un réqeau électrique.
+Bienvenue sur notre plateforme de simulation d'un réseau électrique.
 
 
 ## INTRODUCTION
-
+Notre plateforme simule un réseau sur un laps de temps donné, durant ce laps de temps, il est possible de faire autant de modifications que souhaité dans le réseau.
+Le réseau s'auto-régule selon les différentes modifications apportées. 
+Ce simulateur permet donc d'observer les différents états du réseau selon différents critères.
 
 
 
@@ -65,7 +67,13 @@ Le centre de controle s'assure que le réseau soit fonctionnel et l'ajuste en fo
 Permet l'affichage du graph ainsi que du tableau
 
 
+
 ## MODIFICATIONS
+Pour faire des modifications sur le réseau, il suffit de rajouter un bloc comme ci dessous, et d'y mettre la commande de modification souhaitée pour le réseau
 
-En dessous du message : //Modifications sur le réseau
-
+`Alerte="";`
+`Gaz.addProduction(5000);`
+`Nasa.ControleProduction(graph, tableau);`
+`graph.GetGraph();`
+`Console.WriteLine("\n");`
+`tableau.show();`

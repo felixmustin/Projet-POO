@@ -13,7 +13,7 @@ namespace PROJET
             Thread myThread = new Thread(new ThreadStart(ThreadLoop));
 
             myThread.Start();
-            Thread.Sleep(30000);
+            Thread.Sleep(20000);
             myThread.Interrupt();
         } 
         static public void ThreadLoop()
@@ -73,11 +73,11 @@ namespace PROJET
             {
             Nasa.ControleProduction(graph, tableau);
             graph.GetGraph();
-            Console.WriteLine("\n");
+            Console.WriteLine("\n"+"heEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             tableau.show();
 
-            // Attente de 5s
-            Thread.Sleep(8000);
+            // Attente de 5
+            Thread.Sleep(5000);
 
             Alerte="";
             brabant.Vent(Eolienne);
@@ -87,7 +87,7 @@ namespace PROJET
             tableau.show();
 
             // Attente de 5s
-            Thread.Sleep(8000);
+            Thread.Sleep(5000);
 
             Alerte="";
             Gaz.addProduction(5000);
@@ -97,7 +97,7 @@ namespace PROJET
             tableau.show();
 
             // Attente de 5s
-            Thread.Sleep(8000);  
+            Thread.Sleep(5000);  
 
             Alerte="";
             France.substractConsommation(5000);
@@ -105,6 +105,8 @@ namespace PROJET
             graph.GetGraph();
             Console.WriteLine("\n");
             tableau.show();
+
+            Thread.Sleep(5000);
             }
         }
     }
