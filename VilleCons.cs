@@ -8,9 +8,6 @@ namespace PROJET
             this.id = id;
             this.Production = consommation;
         }
-        public override double getConsommation()
-		{
-			return Production;
-		}
+
     }
 }

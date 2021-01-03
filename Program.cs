@@ -73,7 +73,7 @@ namespace PROJET
             {
             Nasa.ControleProduction(graph, tableau);
             graph.GetGraph();
-            Console.WriteLine("\n"+"heEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            Console.WriteLine("\n");
             tableau.show();
 
             // Attente de 5
@@ -111,26 +111,3 @@ namespace PROJET
         }
     }
 }
-
-
-
-
-            //Modifications sur le réseau
-
-
-            /* brabant.Vent(Eolienne);
-            Gaz.addProduction(5000);
-            France.substractConsommation(5000);
-
-            Nasa.ControleProduction(graph, tableau);
-
-            if (graph.checkForAvailability()){
-                graph.GetGraph();
-                Console.WriteLine("\n");
-                tableau.show();
-            }
-            else{
-                Console.WriteLine("There are less than 2 nodes. Add more to connect.");
-            }*/
-
-            

@@ -1,12 +1,13 @@
+# Projet POO (Mateo Yerlès, Matthias Reveillard, Félix Mustin)
+
 # Simulateur de Réseau Electrique
 Bienvenue sur notre plateforme de simulation d'un réseau électrique.
 
 
 ## INTRODUCTION
 Notre plateforme simule un réseau sur un laps de temps donné, durant ce laps de temps, il est possible de faire autant de modifications que souhaité dans le réseau.
-Le réseau s'auto-régule selon les différentes modifications apportées. 
-Ce simulateur permet donc d'observer les différents états du réseau selon différents critères.
-
+Le réseau s'auto-régule selon les modifications apportées. 
+Ce simulateur permet donc d'observer les différents états du réseau dans différentes conditions.
 
 
 ## UTILISATION
@@ -62,7 +63,7 @@ Le centre de controle s'assure que le réseau soit fonctionnel et l'ajuste en fo
 
 
 **Lancement simulation et modification sur le réseau**
-Pour faire des modifications sur le réseau, il suffit de rajouter un bloc comme ci dessous, et d'y mettre la commande de modification souhaitée pour le réseau
+Pour faire des modifications sur le réseau, il suffit de rajouter un bloc comme ci dessous, et d'y mettre la commande de modification souhaitée pour le réseau. Il faut également augmenter la durée de la simulation en ajoutant du temps dans le Thread.
 
 `Alerte="";`
 `Gaz.addProduction(5000);`

@@ -10,9 +10,5 @@ namespace PROJET
             this.id = id;
         }    
 
-        public override double getConsommation()
-		{
-			return Production;
-		} 
     }
 }

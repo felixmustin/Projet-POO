@@ -9,17 +9,5 @@ namespace PROJET
             this.Production = production;
             this.Cout = Cout;
         }
-        public override double getProduction()
-		{
-			return Production;
-		}
-        public override int getCout()
-        {
-            return Cout;
-        }
-        public override int getCO2()
-        {
-            return Co2_production;
-        }
     }
 }

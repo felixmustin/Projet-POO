@@ -43,7 +43,7 @@ namespace PROJET
 
             if (ProductionTot<ConsommationTot)
             {
-                Console.WriteLine("/! ALERTE /! La consommation surpasse la production, il manque {0}W",(ConsommationTot-ProductionTot));
+                Console.WriteLine("\n \n" + "/! ALERTE /! La consommation surpasse la production, il manque {0}W",(ConsommationTot-ProductionTot));
                 Console.WriteLine("\n");
                 // crée valeur global erreur qui récupère les proplèmes trouvé
 
@@ -81,7 +81,7 @@ namespace PROJET
                 
             else if (ProductionTot>ConsommationTot)
             {
-                Console.WriteLine("/! ALERTE /! La production surpasse la consommation, il y a {0}W en plus", (ProductionTot-ConsommationTot));
+                Console.WriteLine("\n \n" + "/! ALERTE /! La production surpasse la consommation, il y a {0}W en plus", (ProductionTot-ConsommationTot));
                 Console.WriteLine("\n");
 
                 foreach(ConcentrationNode noeuds in liste_noeud_Concentration)
